@@ -1,0 +1,67 @@
+package Project;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class hyperspace {
+
+	public static void main(String[] args) throws Exception {
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		
+		//WebDriverWait wait =new WebDriverWait(driver,Duration.ofMinutes(1));
+		driver.manage().window().maximize();
+		driver.get("https://analytics-frontend-1u4b.onrender.com/auth/signup");
+		
+		Thread.sleep(10000);
+		
+		driver.findElement(By.name("name")).sendKeys("kavya");
+		
+		driver.findElement(By.name("email")).sendKeys("kavya635@yopmail.com");
+		
+		WebElement Roledropdown = driver.findElement(By.name("role"));
+		
+		Select Roledropdownselection = new Select(Roledropdown);	
+		
+		Roledropdownselection.selectByVisibleText("Founder");
+		
+		driver.findElement(By.name("password")).sendKeys("KKavya@123");
+		driver.findElement(By.name("confirmPassword")).sendKeys("KKavya@123");
+		
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		
+		Thread.sleep(30000);
+		
+		driver.findElement(By.xpath("//button[text()='Register']")).click();
+		Thread.sleep(10000);
+		
+		driver.findElement(By.name("profile.brand_name")).sendKeys("brand");
+		
+	        
+		WebElement industrydropdown = driver.findElement(By.tagName("select"));
+			
+		Select industrydropdownselection = new Select(industrydropdown);	
+			
+		industrydropdownselection.selectByVisibleText("Food & Beverages");
+		
+		
+		WebElement uploadimage= driver.findElement(By.xpath("//input[@type='file']"));
+		
+		String imagePath = "C:\\Users\\kavya\\eclipse-workspace\\Reachall\\Screenshots\\9.jpeg";
+		
+		uploadimage.sendKeys(imagePath);
+		
+		Thread.sleep(2000);
+		
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		
+		Thread.sleep(5000);
+		
+		driver.findElement(By.xpath("//button[text()='Skip Tour']")).click();
+	}
+
+}
