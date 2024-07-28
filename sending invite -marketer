@@ -1,0 +1,60 @@
+package Project;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class invite {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+		
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();
+		
+		//WebDriverWait wait =new WebDriverWait(driver,Duration.ofMinutes(1));
+		driver.manage().window().maximize();
+		driver.get("https://analytics-frontend-1u4b.onrender.com/auth");
+		
+		Thread.sleep(5000);
+		
+		driver.findElement(By.name("email")).sendKeys("ks@yopmail.com");
+		driver.findElement(By.name("password")).sendKeys("KKavya@123");
+		driver.findElement(By.xpath("//button[text()='Log in']")).click();
+		
+		Thread.sleep(10000);
+		
+		driver.findElement(By.linkText("Admin")).click();
+		
+		Thread.sleep(5000);
+	
+		driver.findElement(By.xpath("//button[contains(text(),'Add team member')]")).click();
+		
+		driver.findElement(By.name("email")).sendKeys("ks172@yopmail.com");
+		
+		driver.findElement(By.name("name")).sendKeys("kmarketer1");
+		
+		WebElement dropdown = driver.findElement(By.tagName("select"));
+		
+		Select select =new Select (dropdown);
+		
+		select.selectByValue("MARKETER");
+	
+	
+		driver.findElement(By.xpath("//button[contains(text(),'Send Invite')]")).click();
+		
+		WebElement sending = driver.findElement(By.xpath("//div[contains(text(),'Sending invite...')]"));
+		
+		System.out.println(sending.getText());
+		
+		Thread.sleep(10000);	
+	
+		System.out.println("Invite sent successfully");
+	}
+
+}
